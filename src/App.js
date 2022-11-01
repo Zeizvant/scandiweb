@@ -1,9 +1,14 @@
 import './App.css';
 import { PureComponent } from 'react';
+import Menu from './components/Menu/index';
 
 class App extends PureComponent {
   render(){
-    return <h1>Hello World!</h1>
+    return (
+      <div>
+        <Menu />
+      </div>
+    )
   }
 }
 
