@@ -7,21 +7,19 @@ import Cart from '../Cart';
 class Menu extends PureComponent {
     render(){
         return (
-            <div>
-                <div>
+            <div className='menu'>
+                <div className='menu-categories'>
                     <ul>
-                        <li>women</li>
-                        <li>men</li>
-                        <li>kids</li>
+                        <li>all</li>
+                        <li>clothes</li>
+                        <li>tech</li>
                     </ul>
                 </div>
-                <div>
+                <div className='main-logo'>
                     <img src={logo} alt='Logo'/>
                 </div>
-                <div>
-                    <CurrencySwitcher />
-                </div>
-                <div>
+                <div className='currency-cart'>
+                    <CurrencySwitcher changeCurrency={this.props.changeCurrency} currency={this.props.currency}/>
                     <Cart />
                 </div>
             </div>

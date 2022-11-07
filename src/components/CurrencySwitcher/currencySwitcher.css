@@ -1,0 +1,65 @@
+.currency-switcher{
+    display: flex;
+    align-items: center;
+    margin-right: 22px;
+    
+}
+.currency-container{
+    position: relative;
+    display: inline;
+}
+
+.currency-symbol{
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    line-height: 28.8px;
+    font-weight: 500;
+}
+
+#down-arrow{
+    width: 6px;
+    height: 3px;
+    cursor: pointer;
+    padding: 10px;
+}
+#up-arrow{
+    width: 6px;
+    height: 3px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+.currency-dropdown{
+    display: none;
+    position: absolute;
+    color: #1D1F22;
+    line-height: 160%;
+    left: -50px;
+    background-color: #FFF;
+    width: 114px;
+    text-align: center;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 18px;
+    text-align: left;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
+    filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+}
+
+
+.currency-dropdown li{
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.currency-dropdown li:hover{
+    background-color: #EEE;
+}
+
+
+#down-arrow:hover .currency-dropdown {
+    background-color: black;
+}

@@ -1,0 +1,10 @@
+.product-listing{
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-row-gap:103px;
+    grid-column-gap:41px;
+    grid-template-columns: 386px 386px 386px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
