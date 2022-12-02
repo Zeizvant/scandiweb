@@ -1,0 +1,227 @@
+.cart-component{
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-component-item{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-component h1{
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    padding-top: 80px;
+    padding-bottom: 55px;
+    border-bottom: 1px solid #E5E5E5;
+}
+.cart-component-item p {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 27px;
+    font-family: 'Raleway', sans-serif;
+    color: #1D1F22;
+}
+
+.cart-component-price{
+    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    line-height: 24px;
+    color: #1D1F22;
+
+}
+.cart-component-item h2{
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 27px;
+}
+
+.cart-component-atribute-section{
+    display: flex;
+    flex-direction: column;
+}
+.cart-component-atribute-section p{
+    font-size: 18px;
+    font-family: 'Roboto Condensed';
+    line-height: 18px;
+    color: #1D1F22;
+    text-transform: uppercase;
+}
+
+.cart-component-attribute-container{
+    display: flex;
+    gap: 10px;
+}
+.cart-color{
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    margin: 2px;
+}
+.cart-color-unselected{
+    box-sizing: border-box;
+    padding: 1px;
+}
+.cart-color-selected{
+    border: 1px solid #5ECE7B;
+    box-sizing: border-box;
+}
+
+.cart-attribute-item{
+    width:63px;
+    height: 45px;
+    box-sizing: border-box;
+    border: 1px solid #1D1F22;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    letter-spacing: 0.05em;
+    justify-content: center;
+    align-items: center;
+    color: #1D1F22;
+}
+
+.cart-selected-item{
+    width:63px;
+    height: 45px;
+    box-sizing: border-box;
+    border: 1px solid #1D1F22;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    letter-spacing: 0.05em;
+    justify-content: center;
+    align-items: center;
+    background-color: #1D1F22;
+    color: #FFF;
+}
+
+.cart-component-item-continer{
+    display: flex;
+    padding: 24px 0;
+    border-bottom: 1px solid #E5E5E5;
+    justify-content: space-between;
+}
+
+.cart-middle-component{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cart-sign{
+    border: 1px solid #1D1F22;
+    width: 45px;
+    height: 45px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-quantity{
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 160%;
+    display: flex;
+    justify-content: center;
+}
+
+.cart-images{
+    width: 200px;
+    height: 288px;
+    object-fit: cover;
+}
+.cart-component-right{
+    display: flex;
+    gap: 24px;
+}
+
+.cart-images-buttons{
+    width: 24px;
+    height: 24px;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.73);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.cart-img{
+    position: relative;
+}
+#next{
+    position: absolute;
+    z-index: 1;
+    right: 16px;
+    bottom: 16px;
+}
+#previous{
+    position: absolute;
+    z-index: 1;
+    right: 48px;
+    bottom: 16px;
+}
+.cart-component-total{
+    margin-top: 32px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.cart-component-total span{
+    font-family: 'Raleway', sans-serif;
+    width: 104px;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #1D1F22;
+}
+.cart-component-total p{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #1D1F22;
+}
+.order-button{
+    width: 279px;
+    height: 43px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    line-height: 16.8px;
+    color: #FFF;
+    background-color: #5ECE7B;
+    cursor: pointer;
+    margin-bottom: 32px;
+}
+.cart-component-attributes{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+@media (max-width: 660px){
+    .cart-component-item-continer{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .cart-component-right{
+        justify-content: space-between;
+    }
+}

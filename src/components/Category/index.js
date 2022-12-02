@@ -3,7 +3,12 @@ import { PureComponent } from 'react';
 
 class Category extends PureComponent {
     render(){
-        return <div>Categories component</div>
+        return (
+            <div className='category'>
+                <h1>{this.props.category}</h1>
+            </div>
+        )
+        
     }
 }
 

@@ -19,6 +19,16 @@ class CurrencySwitcher extends PureComponent {
     }
 
     componentDidMount(){
+
+        document.addEventListener('click', (event) => {
+            if((!document.querySelector(".currency-dropdown").contains(event.target) && 
+            this.state.arrowClicked && event.target.id != 'up-arrow')){
+                document.querySelector(".currency-dropdown").style.display = 'none';
+                this.setState({arrowClicked: false})
+                
+            }
+        })
+
         client.query({
             query: gql`
             query {
@@ -33,10 +43,15 @@ class CurrencySwitcher extends PureComponent {
         })
     }
 
+    componentWillUnmount(){
+        document.removeEventListener('click')
+    }
+
 
     render(){
-        console.log(this.state.currencies)
+        
         return (
+            
             <div className='currency-switcher'>
                 <p className='currency-symbol'>{this.props.currency}</p>
                 <div className='currency-container'>
@@ -59,7 +74,7 @@ class CurrencySwitcher extends PureComponent {
                         {this.state.currencies.map((currency) => {
                             return (
                             <li key={currency.symbol} onClick={(event => {
-                                this.props.changeCurrency(event.target.innerHTML[0])
+                                this.props.changeCurrency(currency.symbol)
                                 const dropDownMenu = document.querySelector(".currency-dropdown");
                                 dropDownMenu.style.display = "none";
                                 this.setState({arrowClicked: false})

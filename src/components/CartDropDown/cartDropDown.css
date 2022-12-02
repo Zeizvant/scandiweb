@@ -1,0 +1,234 @@
+.cart-dropdown{
+    position: relative;
+}
+
+.cart-dropdown-logo{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.cart-dropdown-menu{
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    position: absolute;
+    display: block;
+    width: 325px;
+    max-height: 677px;
+    right: 0;
+    top: 52px;
+    background-color: #FFF;
+    z-index: 1;
+    box-sizing: border-box;
+}
+.none{
+    display: none;
+}
+
+.cart-dropdown-item{
+    height: 190px;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 40px;
+}
+
+.cart-dropdown-img{
+    width: 121px;
+    height: 190px;
+    object-fit: cover;
+}
+.cart-dropdown-middle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 4px;
+}
+
+.cart-dropdown-middle-buttons{
+    border: 1px solid #1D1F22;
+    width: 24px;
+    height: 24px;
+    color: #1D1F22;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cart-dropdown-middle-quantity{
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    line-height: 25.6px;
+    color: #1D1F22;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-dropdown-menu h2{
+    margin: 32px 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #1D1F22;
+}
+.h2-span{
+    font-weight: 500;
+}
+
+.cart-dropdown-item-header{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #1D1F22;
+}
+.cart-dropdown-item-name{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #1D1F22;
+}
+
+.cart-dropdown-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 136px;
+    overflow: scroll;
+}
+
+.cart-dropdown-price{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #1D1F22;
+}
+
+.cart-dropdown-attribute{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.cart-dropdown-attr-name{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #1D1F22;
+}
+
+.cart-dropdown-color{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 1px;
+}
+.cart-dropdown-color-selected{
+    border: 1px solid #5ECE7B;
+}
+.cart-dropdown-color-noselected{
+    border: none;
+}
+
+.cart-dropdown-attr-items{
+    display: flex;
+    gap: 8px;
+}
+
+
+
+.cart-dropdown-value{
+    width: 24px;
+    min-height: 24px;
+    color: #1D1F22;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #1D1F22;
+    overflow: auto;
+    cursor: pointer;
+}
+.value-selected{
+    background-color: #1D1F22;
+    color: #FFF;
+}
+
+.cart-dropdown-attrs{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+}
+.total-text{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    color: #1D1F22;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.total-price{
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 160%;
+    color: #1D1F22;
+}
+.dropdown-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.dropdown-buttons-bag{
+    width: 140px;
+    height: 43px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 120%;
+    font-style: normal;
+    color: #1D1F22;
+    border: 1px solid #1D1F22;
+    cursor: pointer;
+    
+}
+.dropdown-buttons-check{
+    width: 140px;
+    height: 43px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 120%;
+    font-style: normal;
+    background-color: #5ECE7B;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.total-container{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}

@@ -3,9 +3,16 @@ import { PureComponent } from 'react';
 import Menu from './components/Menu';
 import ProductCard from './components/ProductCard';
 import ProductListing from './components/ProductListing';
+import ProductDescription from './components/ProductDescription'
 import Category from './components/Category';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
-import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
+import Cart from './components/Cart'
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, throwServerError } from '@apollo/client'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 const client = new ApolloClient({
@@ -17,14 +24,105 @@ const client = new ApolloClient({
 
 class App extends PureComponent {
 
+  /**
+   * Main app component which renders Menu, Category, ProductListing, ProductDescription, Cart components
+   */
+
   constructor(props){
     super(props)
-    this.state = {data: [], currency: ['$']}
+    this.state = {
+      data: {}, 
+      currency: ['$'],
+      category: 'all',
+      cartItems: [],
+      totalPrice: 0
+    }
     this.changeCurrency = this.changeCurrency.bind(this)
+    this.changeCategories = this.changeCategories.bind(this)
+    this.addToCart = this.addToCart.bind(this)
+    this.removeFromCart = this.removeFromCart.bind(this)
+    this.countTotal = this.countTotal.bind(this)
+    this.changeCartItem = this.changeCartItem.bind(this)
   }
 
   changeCurrency(currency){
     this.setState({currency: currency})
+  }
+
+  changeCategories(newCategory){
+    this.setState({category: newCategory})
+  }
+
+  countTotal(){
+    let tax = 0;
+    let total = 0;
+    for(let i = 0; i<this.state.cartItems.length; i++){
+      const price = this.state.cartItems[i].price.filter(price => price.currency.symbol == this.state.currency)
+      total += (price[0].amount * this.state.cartItems[i].quantity)
+    }
+    tax = total * 21 / 100
+    this.setState({totalPrice: total, tax: tax})
+  }
+
+  addToCart(item){
+    const array = this.state.cartItems;
+    let found = false;
+    if(this.state.cartItems.length > 0){
+      for(let i = 0; i<this.state.cartItems.length; i++){
+        if(this.state.cartItems[i].longId == item.longId){
+          let quantity = this.state.cartItems[i].quantity + 1;
+          array[i] = {...item, quantity: quantity};
+          this.setState({cartItems: [...array]})
+          found = true
+          break
+        }
+      }
+      if(!found){
+        array.push({...item, quantity: 1})
+      }
+    }else{
+      this.setState({cartItems: [...this.state.cartItems, {...item, quantity: 1}]})
+      
+    }
+  }
+
+
+  componentDidUpdate(){
+    this.countTotal()
+  }
+
+  changeCartItem(item){
+    let found = false
+    let array = this.state.cartItems
+    for(let i=0;i<this.state.cartItems.length;i++ ){
+      if(this.state.cartItems[i].longId == item.longId){
+        let quantity = this.state.cartItems[i].quantity + 1
+        array[i] = {...item, quantity: quantity}
+        this.setState({cartItems: array})
+        found = true
+        break
+      }
+    }
+    if(!found){
+      array.push({...item, quantity: 1})
+      this.setState({cartItems: array})
+    }
+  }
+
+  removeFromCart(item){
+    const array = this.state.cartItems;
+    if(this.state.cartItems.length > 0){
+      for(let i = 0; i<this.state.cartItems.length; i++){
+        if(this.state.cartItems[i].longId == item.longId){
+          if(this.state.cartItems[i].quantity>0){
+            let quantity = this.state.cartItems[i].quantity - 1;
+            array[i] = {...item, quantity: quantity};
+            this.setState({cartItems: [...array]})
+          }
+          
+        }
+      }
+    }
   }
 
   componentDidMount(){
@@ -47,7 +145,21 @@ class App extends PureComponent {
                 symbol,
               }
             }
+            inStock
+            category
             gallery
+            brand
+            description
+            attributes{
+              id
+              name,
+              type,
+              items{
+                displayValue,
+                value,
+                id
+              }
+            }
           }
         }
       }
@@ -59,15 +171,46 @@ class App extends PureComponent {
   }
 
   render(){
-    console.log(this.state.data)
     return (
       <div className='main'>
-        <Menu changeCurrency={this.changeCurrency} currency={this.state.currency}/>
-        <hr />
-        <Category />
-        <hr />
-        <ProductListing data={this.state.data} currency={this.state.currency}/>
-        
+        <Router>
+          <Menu 
+            changeCurrency={this.changeCurrency} 
+            changeCategories={this.changeCategories} 
+            currency={this.state.currency} 
+            data={this.state.data} 
+            cartItems={this.state.cartItems}
+            addToCart={this.addToCart}
+            removeFromCart={this.removeFromCart}
+            totalPrice={this.state.totalPrice}
+          />
+          <div className='body-main'>
+            
+              <Routes>
+                <Route path='/' element={[<Category category={this.state.category}/>, 
+                  <ProductListing category={this.state.category} data={this.state.data} currency={this.state.currency} addToCart={this.addToCart}/>]}
+                />
+                <Route path='/details/:name' element={
+                <ProductDescription 
+                  data={this.state.data} 
+                  currency={this.state.currency}
+                  changeCartItem={this.changeCartItem}
+                />}/>
+                <Route path='/cart' element={
+                  <Cart 
+                    data={this.state.data} 
+                    currency={this.state.currency}
+                    cartItems={this.state.cartItems}
+                    addToCart={this.addToCart}
+                    changeCartItem={this.changeCartItem}
+                    removeFromCart={this.removeFromCart}
+                    totalPrice={this.state.totalPrice}
+                    tax={this.state.tax}
+                  />} />
+              </Routes>
+            
+          </div>
+        </Router>
         
       </div>
     )

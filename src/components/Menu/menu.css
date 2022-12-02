@@ -1,29 +1,45 @@
+.menu-main{
+    width: 100%;
+    background-color: #FFF;
+}
 .menu{
     display: flex;
+    width: 90%;
+    margin: 0 auto;
     justify-content: space-between;
     height: 80px;
+    align-items: center;
+    background-color: #FFF;
+}
+.menu-categories{
+    display: flex;
     align-items: center;
 }
 .menu-categories ul{
     display: flex;
-    height: 80px;
-    align-items: flex-end;
-    
+    align-items: center;
 }
 .menu-categories ul li{
+    display: flex;
     font-size: 16px;
+    align-items: center;
+    justify-self: center;
     text-transform: uppercase;
-    font-family: 'Raleway', sans-serif;;
+    font-family: 'Raleway', sans-serif;
     font-weight: 600;
     line-height: 120%;
     color: #1D1F22;
-    margin: 0 16px 40px;
+    margin: 0 16px;
     cursor: pointer;
     /* hovered #5ECE7B */
 
 
 }
+a{
+    text-decoration: none;
+}
 
 .currency-cart{
     display: flex;
+    align-items: center;
 }
