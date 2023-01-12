@@ -1,7 +1,7 @@
 import React from 'react'
 import { PureComponent } from 'react';
 import './productDescription.css';
-import DOMPurify from 'dompurify'
+import { Interweave } from 'interweave';
 import { useParams } from 'react-router-dom';
 
 class ProductDescription extends PureComponent {
@@ -91,7 +91,11 @@ class ProductDescription extends PureComponent {
                                 longId: id
                             })
                         }}>ADD TO CART</div>
-                        <div className='product-description-text' dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(item.description)}}></div>
+                        
+                        <div className='product-description-text' >
+                            <Interweave content={item.description} />
+                            
+                        </div>
                     </div>
                 </div>
             )

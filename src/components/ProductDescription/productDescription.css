@@ -148,7 +148,13 @@
     margin: 20px 0;
 }
 .product-description-text{
-    overflow: scroll;
+    overflow-y: scroll;
+}
+.product-description-text ul{
+    padding: 20px;
+}
+.product-description-text ul li{
+    list-style: circle;
 }
 @media (max-width: 1180px){
     .product-description-container{
