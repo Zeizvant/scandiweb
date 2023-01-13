@@ -11,7 +11,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Navigate
 } from "react-router-dom";
 
 
@@ -33,12 +33,11 @@ class App extends PureComponent {
     this.state = {
       data: {}, 
       currency: ['$'],
-      category: 'all',
       cartItems: [],
-      totalPrice: 0
+      totalPrice: 0,
+      categories: []
     }
     this.changeCurrency = this.changeCurrency.bind(this)
-    this.changeCategories = this.changeCategories.bind(this)
     this.addToCart = this.addToCart.bind(this)
     this.removeFromCart = this.removeFromCart.bind(this)
     this.countTotal = this.countTotal.bind(this)
@@ -47,10 +46,6 @@ class App extends PureComponent {
 
   changeCurrency(currency){
     this.setState({currency: currency})
-  }
-
-  changeCategories(newCategory){
-    this.setState({category: newCategory})
   }
 
   countTotal(){
@@ -135,6 +130,9 @@ class App extends PureComponent {
     client.query({
       query: gql`
       query {
+        categories{
+          name
+        },
         category{
           products{
             id
@@ -165,7 +163,7 @@ class App extends PureComponent {
       }
       `
     }).then((result) => {
-      this.setState({data: result.data.category.products})
+      this.setState({data: result.data.category.products, categories: result.data.categories})
     })
     
   }
@@ -175,27 +173,30 @@ class App extends PureComponent {
       <div className='main'>
         <Router>
           <Menu 
-            changeCurrency={this.changeCurrency} 
-            changeCategories={this.changeCategories} 
+            changeCurrency={this.changeCurrency}
             currency={this.state.currency} 
             data={this.state.data} 
             cartItems={this.state.cartItems}
             addToCart={this.addToCart}
             removeFromCart={this.removeFromCart}
             totalPrice={this.state.totalPrice}
+            categories={this.state.categories}
           />
           <div className='body-main'>
             
-              <Routes>
-                <Route path='/' element={[<Category category={this.state.category}/>, 
-                  <ProductListing category={this.state.category} data={this.state.data} currency={this.state.currency} addToCart={this.addToCart}/>]}
+              <Routes>  
+                <Route exact path="/" element={<Navigate to='/all'/>} />
+                <Route path="/:category" element={[<Category />, 
+                  <ProductListing category={this.state.category} data={this.state.data} currency={this.state.currency} addToCart={this.addToCart}/>
+                ]}
                 />
                 <Route path='/details/:name' element={
-                <ProductDescription 
-                  data={this.state.data} 
-                  currency={this.state.currency}
-                  changeCartItem={this.changeCartItem}
-                />}/>
+                  <ProductDescription 
+                    data={this.state.data} 
+                    currency={this.state.currency}
+                    changeCartItem={this.changeCartItem}
+                  />}
+                />
                 <Route path='/cart' element={
                   <Cart 
                     data={this.state.data} 

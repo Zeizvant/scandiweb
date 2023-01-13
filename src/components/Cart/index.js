@@ -81,7 +81,7 @@ class Cart extends PureComponent {
                                     const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
                                     if(cartItem.id === item.id && cartItem.quantity > 0){
                                         return (
-                                            <div className='cart-component-item-continer'>
+                                            <div className='cart-component-item-continer' key={item.id}>
                                         <div className='cart-component-item'>
                                             <h2>{item.brand}</h2>
                                             <p>{item.name}</p>

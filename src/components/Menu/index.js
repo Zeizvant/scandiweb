@@ -4,7 +4,6 @@ import logo from '../../images/logo.png';
 import CurrencySwitcher from '../CurrencySwitcher';
 import CartDropDown from '../CartDropDown'
 import {Link} from 'react-router-dom'
-import { throwServerError } from '@apollo/client';
 
 class Menu extends PureComponent {
     render(){
@@ -13,22 +12,15 @@ class Menu extends PureComponent {
                 <div className='menu'>
                     <div className='menu-categories'>
                         <ul>
-                            <Link to='/'>
-                                <li onClick={(event) => {
-                                    this.props.changeCategories(event.target.innerHTML)
-                                }}>all</li>
-                            </Link>
-                            <Link to='/'>
-                                <li onClick={(event) => {
-                                    this.props.changeCategories(event.target.innerHTML)
-                                }}>clothes</li>
-                            </Link>
-                            
-                            <Link to='/'>
-                                <li onClick={(event) => {
-                                    this.props.changeCategories(event.target.innerHTML)
-                                }}>tech</li>
-                            </Link>
+                            {
+                                this.props.categories.map(category => {
+                                    return (
+                                        <Link to={`/${category.name}`} key={category.name}>
+                                            <li >{category.name}</li>
+                                        </Link>
+                                    )
+                                })
+                            }
                             
                         </ul>
                     </div>

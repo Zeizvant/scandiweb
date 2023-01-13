@@ -112,8 +112,8 @@ class CartDropDown extends PureComponent {
                                                                                                 
                                                                                             });
                                                                                             return (
-                                                                                                <div className={attr.name == attrObj.name && item.value == attrObj.value ? 'cart-dropdown-color-selected' : 'cart-dropdown-color-noselected'}>
-                                                                                                    <div key={item.id} className="cart-dropdown-color" style={{'background': item.value}}></div>
+                                                                                                <div key={item.id} className={attr.name == attrObj.name && item.value == attrObj.value ? 'cart-dropdown-color-selected' : 'cart-dropdown-color-noselected'}>
+                                                                                                    <div  className="cart-dropdown-color" style={{'background': item.value}}></div>
                                                                                                 </div>
                                                                                             )
                                                                                         })}
