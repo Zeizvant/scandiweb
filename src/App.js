@@ -6,7 +6,7 @@ import ProductListing from './components/ProductListing';
 import ProductDescription from './components/ProductDescription'
 import Category from './components/Category';
 import Cart from './components/Cart'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql, throwServerError } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client'
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,7 +16,7 @@ import {
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'http://192.168.1.2:4000',
   cache: new InMemoryCache(),
 })
 
@@ -123,7 +123,7 @@ class App extends PureComponent {
   componentDidMount(){
     
     const client = new ApolloClient({
-      uri: 'http://localhost:4000',
+      uri: 'http://192.168.1.2:4000',
       cache: new InMemoryCache()
     })
 
@@ -183,7 +183,9 @@ class App extends PureComponent {
             categories={this.state.categories}
           />
           <div className='body-main'>
-            
+              <div className='overlay'>
+
+              </div>
               <Routes>  
                 <Route exact path="/" element={<Navigate to='/all'/>} />
                 <Route path="/:category" element={[<Category />, 

@@ -8,7 +8,7 @@
     grid-template-columns: 386px 386px 386px;
     justify-content: space-between;
     box-sizing: border-box;
-    background-color: inherit;
+    background-color: initial;
 }
 
 @media (max-width: 1560px){

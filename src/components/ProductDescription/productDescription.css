@@ -1,7 +1,6 @@
 .product-description-container{
     display: flex;
-    margin-top: 72px;
-    padding-top: 10px;
+    padding-top: 82px;
     gap: 40px;
 }
 

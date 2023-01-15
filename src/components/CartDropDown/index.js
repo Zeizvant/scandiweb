@@ -19,10 +19,8 @@ class CartDropDown extends PureComponent {
             event.target.id !== 'cart-dropdown-logo'
             ){
                 this.setState({clicked: false})
-                document.querySelector('.product-listing').style.filter = 'none'
-                const body = document.querySelector('.main')
-                body.style.backgroundColor = '#FFF'
-                document.querySelector('.body-main').style.filter = 'none'
+                document.querySelector('.overlay').style.display = "none"
+                document.body.style.overflow = 'auto'
             }
             }
             
@@ -66,17 +64,17 @@ class CartDropDown extends PureComponent {
         if(this.props.data[0] != undefined){
                         
                         return (
+                            
                             <div className="cart-dropdown">
                                 <img id="cart-dropdown-logo" className='cart-dropdown-logo' src={cartLogo} onClick={() => {
                                     const body = document.querySelector('.main')
                                     if(!this.state.clicked){
-                                        body.style.backgroundColor = 'rgba(57, 55, 72, 0.22)'
-                                        document.querySelector('.body-main').style.filter = 'grayscale(100%)'
-                                        document.querySelector('.cart-dropdown-menu').style.filter = 'none';
+                                        document.querySelector('.overlay').style.display = "block"
+                                        document.body.style.overflow = 'hidden'
                                     }else{
-                                        body.style.backgroundColor = '#FFF'
-                                        document.querySelector('.body-main').style.filter = 'none'
-                                        }
+                                        document.querySelector('.overlay').style.display = "none"
+                                        document.body.style.overflow = 'auto'
+                                    }
                                     this.setState({clicked: !this.state.clicked})
                                     
                                     
