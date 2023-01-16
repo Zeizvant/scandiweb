@@ -1,7 +1,6 @@
 import './App.css';
 import { PureComponent } from 'react';
 import Menu from './components/Menu';
-import ProductCard from './components/ProductCard';
 import ProductListing from './components/ProductListing';
 import ProductDescription from './components/ProductDescription'
 import Category from './components/Category';
@@ -48,6 +47,7 @@ class App extends PureComponent {
 
   changeCurrency(currency){
     this.setState({currency: currency})
+    window.localStorage.setItem('currency', currency)
   }
 
   countTotal(){
@@ -170,6 +170,10 @@ class App extends PureComponent {
       `
     }).then((result) => {
       this.setState({data: result.data.category.products, categories: result.data.categories})
+      const currency = window.localStorage.getItem('currency')
+      if(currency !== null){
+        this.setState({currency: [currency]})
+      }
     })
     
   }
