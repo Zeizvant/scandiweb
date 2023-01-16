@@ -26,6 +26,7 @@ class CartDropDown extends PureComponent {
             
         })
     }
+    
 
     componentWillUnmount(){
         document.removeEventListener('click')
@@ -62,10 +63,13 @@ class CartDropDown extends PureComponent {
 
     render(){
         if(this.props.data[0] != undefined){
-                        
                         return (
                             
                             <div className="cart-dropdown">
+                                {
+                                    this.props.quantity > 0 && 
+                                    <div className='quantity-circle'>{this.props.quantity}</div>
+                                }
                                 <img id="cart-dropdown-logo" className='cart-dropdown-logo' src={cartLogo} onClick={() => {
                                     const body = document.querySelector('.main')
                                     if(!this.state.clicked){
@@ -75,9 +79,7 @@ class CartDropDown extends PureComponent {
                                         document.querySelector('.overlay').style.display = "none"
                                         document.body.style.overflow = 'auto'
                                     }
-                                    this.setState({clicked: !this.state.clicked})
-                                    
-                                    
+                                    this.setState({clicked: !this.state.clicked})   
                                 }}/>
                                 
                                 <div className={this.state.clicked ? 'cart-dropdown-menu' : 'cart-dropdown-menu none'}>

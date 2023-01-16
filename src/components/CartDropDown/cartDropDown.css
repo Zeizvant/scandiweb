@@ -8,6 +8,25 @@
     cursor: pointer;
     margin-right: 20px;
 }
+.quantity-circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1D1F22;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+}
 .cart-dropdown-menu{
     overflow: scroll;
     display: flex;

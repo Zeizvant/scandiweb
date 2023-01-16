@@ -35,7 +35,9 @@ class App extends PureComponent {
       currency: ['$'],
       cartItems: [],
       totalPrice: 0,
-      categories: []
+      categories: [],
+      tax: 0,
+      quantity: 0
     }
     this.changeCurrency = this.changeCurrency.bind(this)
     this.addToCart = this.addToCart.bind(this)
@@ -51,12 +53,14 @@ class App extends PureComponent {
   countTotal(){
     let tax = 0;
     let total = 0;
+    let quantity = 0;
     for(let i = 0; i<this.state.cartItems.length; i++){
       const price = this.state.cartItems[i].price.filter(price => price.currency.symbol == this.state.currency)
       total += (price[0].amount * this.state.cartItems[i].quantity)
+      quantity += this.state.cartItems[i].quantity
     }
     tax = total * 21 / 100
-    this.setState({totalPrice: total, tax: tax})
+    this.setState({totalPrice: total, tax: tax, quantity: quantity})
   }
 
   addToCart(item){
@@ -65,6 +69,7 @@ class App extends PureComponent {
     if(this.state.cartItems.length > 0){
       for(let i = 0; i<this.state.cartItems.length; i++){
         if(this.state.cartItems[i].longId == item.longId){
+          console.log("1")
           let quantity = this.state.cartItems[i].quantity + 1;
           array[i] = {...item, quantity: quantity};
           this.setState({cartItems: [...array]})
@@ -74,17 +79,13 @@ class App extends PureComponent {
       }
       if(!found){
         array.push({...item, quantity: 1})
+        this.setState({cartItems: [...array]})
       }
     }else{
       this.setState({cartItems: [...this.state.cartItems, {...item, quantity: 1}]})
-      
     }
   }
 
-
-  componentDidUpdate(){
-    this.countTotal()
-  }
 
   changeCartItem(item){
     let found = false
@@ -118,6 +119,10 @@ class App extends PureComponent {
         }
       }
     }
+  }
+
+  componentDidUpdate(){
+    this.countTotal()
   }
 
   componentDidMount(){
@@ -181,6 +186,7 @@ class App extends PureComponent {
             removeFromCart={this.removeFromCart}
             totalPrice={this.state.totalPrice}
             categories={this.state.categories}
+            quantity={this.state.quantity}
           />
           <div className='body-main'>
               <div className='overlay'>

@@ -6,6 +6,7 @@ import CartDropDown from '../CartDropDown'
 import {Link} from 'react-router-dom'
 
 class Menu extends PureComponent {
+
     render(){
         return (
             <div className='menu-main'>
@@ -39,6 +40,7 @@ class Menu extends PureComponent {
                             addToCart={this.props.addToCart}
                             removeFromCart={this.props.removeFromCart}
                             totalPrice={this.props.totalPrice}
+                            quantity={this.props.quantity}
                         />
                     </div>
                 </div>
