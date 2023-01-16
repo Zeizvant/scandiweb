@@ -37,7 +37,7 @@ class ProductCard extends PureComponent {
                     }
                 }}/>
                 <p className={this.props.inStock? 'product-name-card' : 'product-name-card out'}>
-                    {this.props.name}
+                    {this.props.brand + " " + this.props.name }
                 </p>
                 <p className={this.props.inStock ? 'product-price-card' : 'product-price-card out'}>
                     {this.props.price}

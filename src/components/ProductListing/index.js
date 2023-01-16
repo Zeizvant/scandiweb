@@ -7,6 +7,7 @@ class ProductListing extends PureComponent {
 
     render(){
         if(this.props.data[0] != undefined){
+            console.log(this.props.data)
             return (
                 <div className='product-listing'>
                     {this.props.data.map((item) => {
@@ -22,6 +23,7 @@ class ProductListing extends PureComponent {
                                 inStock={item.inStock}
                                 addToCart={this.props.addToCart}
                                 attributes={item.attributes}
+                                brand={item.brand}
                                 />
                         }
                         if(item.category === this.props.params.category){
@@ -35,6 +37,7 @@ class ProductListing extends PureComponent {
                                 inStock={item.inStock}
                                 addToCart={this.props.addToCart}
                                 attributes={item.attributes}
+                                brand={item.brand}
                                 />
                         }
                     })}
