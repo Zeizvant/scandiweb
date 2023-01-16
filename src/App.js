@@ -61,6 +61,7 @@ class App extends PureComponent {
     }
     tax = total * 21 / 100
     this.setState({totalPrice: total, tax: tax, quantity: quantity})
+    window.localStorage.setItem("cart-items", JSON.stringify(this.state.cartItems))
   }
 
   addToCart(item){
@@ -173,6 +174,10 @@ class App extends PureComponent {
       const currency = window.localStorage.getItem('currency')
       if(currency !== null){
         this.setState({currency: [currency]})
+      }
+      const cartItems = JSON.parse(window.localStorage.getItem('cart-items'))
+      if(cartItems !== null){
+        this.setState({cartItems: [...cartItems]})
       }
     })
     
