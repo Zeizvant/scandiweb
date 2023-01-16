@@ -10,16 +10,3 @@
     box-sizing: border-box;
     background-color: initial;
 }
-
-@media (max-width: 1560px){
-    .product-listing{
-        grid-template-columns: 386px 386px;
-        justify-content: space-evenly;
-    }
-}
-@media (max-width: 830px){
-    .product-listing{
-        grid-template-columns: 386px;
-        justify-content: center;
-    }
-}

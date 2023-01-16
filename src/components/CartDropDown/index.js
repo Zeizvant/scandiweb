@@ -96,7 +96,7 @@ class CartDropDown extends PureComponent {
                                                             <div className='cart-dropdown-description'>
                                                                 <p className='cart-dropdown-item-header'>{item.brand}</p>
                                                                 <p className='cart-dropdown-item-name'>{item.name}</p>
-                                                                <p className='cart-dropdown-price'>{price[0].currency.symbol + price[0].amount}</p>
+                                                                <p className='cart-dropdown-price'>{price[0].currency.symbol + price[0].amount.toFixed(2)}</p>
                                                                 <div className='cart-dropdown-attrs'>
                                                                     {item.attributes.map(attr => {
                                                                         if(attr.type == 'swatch'){

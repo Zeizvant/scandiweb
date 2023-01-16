@@ -17,7 +17,7 @@ class ProductListing extends PureComponent {
                                 id={item.id}
                                 name={item.name}
                                 amount={item.prices}
-                                price={price[0].currency.symbol + price[0].amount} 
+                                price={price[0].currency.symbol + (price[0].amount.toFixed(2))} 
                                 img={item.gallery[0]}
                                 inStock={item.inStock}
                                 addToCart={this.props.addToCart}
@@ -31,7 +31,7 @@ class ProductListing extends PureComponent {
                                 id={item.id}
                                 name={item.name}
                                 amount={item.prices}
-                                price={price[0].currency.symbol + price[0].amount} 
+                                price={price[0].currency.symbol + price[0].amount.toFixed(2)}
                                 img={item.gallery[0]}
                                 inStock={item.inStock}
                                 addToCart={this.props.addToCart}

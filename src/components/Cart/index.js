@@ -85,7 +85,7 @@ class Cart extends PureComponent {
                                         <div className='cart-component-item'>
                                             <h2>{item.brand}</h2>
                                             <p>{item.name}</p>
-                                            <p className='cart-component-price'>{price[0].currency.symbol + price[0].amount}</p>
+                                            <p className='cart-component-price'>{price[0].currency.symbol + price[0].amount.toFixed(2)}</p>
                                             <div className='cart-component-attributes'>
                                                 {item.attributes.map(attr => {
                                                     if(attr.type == 'swatch'){

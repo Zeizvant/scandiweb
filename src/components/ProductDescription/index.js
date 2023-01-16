@@ -88,7 +88,7 @@ class ProductDescription extends PureComponent {
                         </div>
                         <div className='product-description-price-container'>
                             <p className='attribute-name'>Price:</p>
-                            <p className='product-description-price'>{price[0].currency.symbol + price[0].amount}</p>
+                            <p className='product-description-price'>{price[0].currency.symbol + price[0].amount.toFixed(2)}</p>
                         </div>
                         <div className={item.inStock ? 'add-to-cart-button' :'add-to-cart-button disabled' } onClick={(event) => {
                             if(item.inStock && this.state.submitEnable){
