@@ -182,7 +182,7 @@ class Cart extends PureComponent {
                             <div className='cart-component-total'>
                                 <p><span>Tax 21%:</span>{this.props.currency + this.props.tax.toFixed(2)}</p>
                                 <p><span>Quantity:</span>{quantity}</p>
-                                <p><span>Total:</span>{this.props.currency + (this.props.totalPrice + this.props.tax).toFixed(2)}</p>
+                                <p><span>Total:</span>{this.props.currency + (this.props.totalPrice).toFixed(2)}</p>
                                 <div className='order-button'>order</div>
                             </div>
                         )
