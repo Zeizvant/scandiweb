@@ -16,10 +16,10 @@ class ProductCard extends PureComponent {
                     </Link>
                     
                     :
-                    <div>
+                    <Link to={`/details/${this.props.id}`} >
                         <img className='product-image out' src={this.props.img} alt='product'/>
                         <div className='stock-text'>OUT OF STOCK</div>
-                    </div>
+                    </Link>
                 }
                 
                 <img className={'cart-image'} src={cart} alt='add to cart image' onClick={() => {

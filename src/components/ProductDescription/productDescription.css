@@ -70,6 +70,20 @@
     border: 1px solid #5ECE7B;
     box-sizing: border-box;
 }
+.main-image{
+    position: relative;
+}
+.description-stock-text{
+    position: absolute;
+    color: #8D8F9A;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif;
+    line-height: 38.4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .main-image img{
     width: 610px;
@@ -146,6 +160,10 @@
     border: none;
     margin: 20px 0;
 }
+.disabled{
+    cursor: default;
+}
+
 .product-description-text{
     overflow-y: scroll;
 }

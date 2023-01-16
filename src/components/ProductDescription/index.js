@@ -32,7 +32,8 @@ class ProductDescription extends PureComponent {
                         })}
                     </div>
                     <div className='main-image'>
-                        <img src={this.state.mainImg || images[0]}  alt={item.name}/>
+                        <img className={!item.inStock && 'out'} src={this.state.mainImg || images[0]}  alt={item.name}/>
+                        {!item.inStock && <div className='description-stock-text'>OUT OF STOCK</div>}
                     </div>
                     <div className='product-description-section'>
                         <h2 className='product-description-header'>{item.brand}</h2>
@@ -78,9 +79,10 @@ class ProductDescription extends PureComponent {
                             <p className='attribute-name'>Price:</p>
                             <p className='product-description-price'>{price[0].currency.symbol + price[0].amount}</p>
                         </div>
-                        <div className='add-to-cart-button' onClick={(event) => {
-                            let id = item.id
-                            this.props.changeCartItem({
+                        <div className={item.inStock ? 'add-to-cart-button' :'add-to-cart-button disabled' } onClick={(event) => {
+                            if(item.inStock){
+                                let id = item.id
+                                this.props.changeCartItem({
                                 id: item.id,
                                 name: item.name,
                                 price: item.prices,
@@ -90,6 +92,8 @@ class ProductDescription extends PureComponent {
                                 }),
                                 longId: id
                             })
+                            }
+                            
                         }}>ADD TO CART</div>
                         
                         <div className='product-description-text' >
