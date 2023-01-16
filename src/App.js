@@ -69,7 +69,6 @@ class App extends PureComponent {
     if(this.state.cartItems.length > 0){
       for(let i = 0; i<this.state.cartItems.length; i++){
         if(this.state.cartItems[i].longId == item.longId){
-          console.log("1")
           let quantity = this.state.cartItems[i].quantity + 1;
           array[i] = {...item, quantity: quantity};
           this.setState({cartItems: [...array]})
@@ -106,16 +105,18 @@ class App extends PureComponent {
   }
 
   removeFromCart(item){
-    const array = this.state.cartItems;
+    let array = this.state.cartItems;
     if(this.state.cartItems.length > 0){
       for(let i = 0; i<this.state.cartItems.length; i++){
         if(this.state.cartItems[i].longId == item.longId){
-          if(this.state.cartItems[i].quantity>0){
+          if(this.state.cartItems[i].quantity == 1){
+            array = array.slice(0, i).concat(array.slice(i+1))
+            this.setState({cartItems: [...array]})
+          }else if(this.state.cartItems[i].quantity>0){
             let quantity = this.state.cartItems[i].quantity - 1;
             array[i] = {...item, quantity: quantity};
             this.setState({cartItems: [...array]})
-          }
-          
+          }  
         }
       }
     }

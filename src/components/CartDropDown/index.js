@@ -16,7 +16,7 @@ class CartDropDown extends PureComponent {
         document.addEventListener('click', (event) => {
             if(document.querySelector('.cart-dropdown-menu') != undefined){
                 if(!document.querySelector('.cart-dropdown-menu').contains(event.target) && this.state.clicked && 
-            event.target.id !== 'cart-dropdown-logo'
+            event.target.id !== 'cart-dropdown-logo' && event.target.id !== 'minus-button'
             ){
                 this.setState({clicked: false})
                 document.querySelector('.overlay').style.display = "none"
@@ -58,7 +58,7 @@ class CartDropDown extends PureComponent {
             }),
             longId: id
         })
-        
+        this.setState({clicked: true})
     }
 
     render(){
@@ -90,7 +90,7 @@ class CartDropDown extends PureComponent {
                                         return (
                                             this.props.data.map((item) => {
                                                 const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
-                                                if(cartItem.id === item.id && cartItem.quantity > 0){
+                                                if(cartItem.id === item.id){
                                                     return ( 
                                                         <div key={cartItem.id} className='cart-dropdown-item'>
                                                             <div className='cart-dropdown-description'>
@@ -152,7 +152,7 @@ class CartDropDown extends PureComponent {
                                                                     this.plusButton(item, item.prices, cartItem.attributes)
                                                                 }}>+</div>
                                                                 <div className='cart-dropdown-middle-quantity'>{cartItem.quantity}</div>
-                                                                <div className='cart-dropdown-middle-buttons' onClick={() => {
+                                                                <div id='minus-button' className='cart-dropdown-middle-buttons' onClick={() => {
                                                                     this.minusButton(item, item.prices, cartItem.attributes)
                                                                 }}>-</div>
                                                             </div>
@@ -176,9 +176,9 @@ class CartDropDown extends PureComponent {
                                             <div className='dropdown-buttons'>
                                                 <Link to='/cart'>
                                                     <div className='dropdown-buttons-bag' onClick={() => {
-                                                        document.querySelector('.main').style.backgroundColor = '#FFF'
-                                                        document.querySelector('.body-main').style.filter = 'none'
                                                         this.setState({clicked: false})
+                                                        document.querySelector('.overlay').style.display = "none"
+                                                        document.body.style.overflow = 'auto'
                                                     }}>view bag</div>
                                                 </Link>
                                                 <div className='dropdown-buttons-check'>check out</div>

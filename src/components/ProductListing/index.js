@@ -7,7 +7,6 @@ class ProductListing extends PureComponent {
 
     render(){
         if(this.props.data[0] != undefined){
-            console.log(this.props.data)
             return (
                 <div className='product-listing'>
                     {this.props.data.map((item) => {

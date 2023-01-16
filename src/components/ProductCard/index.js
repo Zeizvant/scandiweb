@@ -9,7 +9,8 @@ class ProductCard extends PureComponent {
     render(){
         return (
             <div className='product-card'>
-                {this.props.inStock ? 
+                {
+                this.props.inStock ? 
                     <Link to={`/details/${this.props.id}`} >
                         <img className='product-image' src={this.props.img} alt='product'/>
                     </Link>
