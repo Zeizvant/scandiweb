@@ -8,13 +8,24 @@ class ProductDescription extends PureComponent {
 
     constructor(props){
         super(props)
-        this.state = {mainImg: '', Color: ''}
+        this.state = {mainImg: '', Color: '', submitEnable: false}
     }
 
-    
-    
-    
-    
+    componentDidUpdate(){
+        const item = this.props.data.find(item => {
+            return item.id == this.props.params.name;
+        })
+        let counter = 0;
+        for(let i = 0; i < item.attributes.length; i++){
+            if(this.state[item.attributes[i].name] !== "" && this.state[item.attributes[i].name] !== undefined){
+                counter++
+            }
+        }
+        if(counter === item.attributes.length){
+            this.setState({submitEnable: true})
+        }
+    }
+
     render(){
         if (this.props.data[0] != undefined){
             const item = this.props.data.find(item => {
@@ -32,7 +43,7 @@ class ProductDescription extends PureComponent {
                         })}
                     </div>
                     <div className='main-image'>
-                        <img className={!item.inStock && 'out'} src={this.state.mainImg || images[0]}  alt={item.name}/>
+                        <img className={!item.inStock? 'out' : ""} src={this.state.mainImg || images[0]}  alt={item.name}/>
                         {!item.inStock && <div className='description-stock-text'>OUT OF STOCK</div>}
                     </div>
                     <div className='product-description-section'>
@@ -80,7 +91,7 @@ class ProductDescription extends PureComponent {
                             <p className='product-description-price'>{price[0].currency.symbol + price[0].amount}</p>
                         </div>
                         <div className={item.inStock ? 'add-to-cart-button' :'add-to-cart-button disabled' } onClick={(event) => {
-                            if(item.inStock){
+                            if(item.inStock && this.state.submitEnable){
                                 let id = item.id
                                 this.props.changeCartItem({
                                 id: item.id,
