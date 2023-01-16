@@ -68,7 +68,9 @@ class CartDropDown extends PureComponent {
                             <div className="cart-dropdown">
                                 {
                                     this.props.quantity > 0 && 
-                                    <div className='quantity-circle'>{this.props.quantity}</div>
+                                    <div className='quantity-circle'>
+                                        {this.props.quantity}
+                                    </div>
                                 }
                                 <img id="cart-dropdown-logo" className='cart-dropdown-logo' src={cartLogo} onClick={() => {
                                     const body = document.querySelector('.main')
