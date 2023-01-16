@@ -101,7 +101,7 @@ class App extends PureComponent {
     }
     if(!found){
       array.push({...item, quantity: 1})
-      this.setState({cartItems: array})
+      this.setState({cartItems: [...array]})
     }
   }
 
