@@ -2,6 +2,7 @@ import './category.css';
 import { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 
+
 class Category extends PureComponent {
     render(){
         return (

@@ -2,10 +2,14 @@ import { PureComponent } from 'react';
 import './productCard.css'
 import cart from '../../images/cart.png'
 import {Link} from 'react-router-dom'   
+import Context from '../../Context';
 
 
 
 class ProductCard extends PureComponent {
+
+    static contextType = Context
+    
     render(){
         return (
             <div className='product-card'>
@@ -25,7 +29,7 @@ class ProductCard extends PureComponent {
                 <img className={'cart-image'} src={cart} alt='add to cart image' onClick={() => {
                     if(this.props.inStock == true){
                         let id = this.props.id
-                        this.props.addToCart({
+                        this.context.addToCart({
                             id: this.props.id,
                             name: this.props.name,
                             price: this.props.amount,

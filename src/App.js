@@ -1,5 +1,5 @@
 import './App.css';
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import Menu from './components/Menu';
 import ProductListing from './components/ProductListing';
 import ProductDescription from './components/ProductDescription'
@@ -12,12 +12,14 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
+import Context from './Context';
 
 
 const client = new ApolloClient({
   uri: 'http://192.168.1.2:4000',
   cache: new InMemoryCache(),
 })
+
 
 
 
@@ -186,51 +188,46 @@ class App extends PureComponent {
   render(){
     return (
       <div className='main'>
-        <Router>
-          <Menu 
-            changeCurrency={this.changeCurrency}
-            currency={this.state.currency} 
-            data={this.state.data} 
-            cartItems={this.state.cartItems}
-            addToCart={this.addToCart}
-            removeFromCart={this.removeFromCart}
-            totalPrice={this.state.totalPrice}
-            categories={this.state.categories}
-            quantity={this.state.quantity}
-          />
-          <div className='body-main'>
-              <div className='overlay'>
+        <Context.Provider value={{
+          changeCurrency: this.changeCurrency,
+          currency: this.state.currency,
+          data: this.state.data,
+          cartItems: this.state.cartItems,
+          addToCart: this.addToCart,
+          removeFromCart: this.removeFromCart,
+          totalPrice: this.state.totalPrice,
+          categories: this.state.categories,
+          quantity: this.state.quantity,
+          changeCartItem: this.state.changeCartItem,
+          totalPrice: this.state.totalPrice,
+          tax: this.state.tax,
+          changeCartItem: this.changeCartItem
+        }}>
+          <Router>
+            <Menu />
+            <div className='body-main'>
+                <div className='overlay'>
 
-              </div>
-              <Routes>  
-                <Route exact path="/" element={<Navigate to='/all'/>} />
-                <Route path="/:category" element={[<Category />, 
-                  <ProductListing category={this.state.category} data={this.state.data} currency={this.state.currency} addToCart={this.addToCart}/>
-                ]}
-                />
-                <Route path='/details/:name' element={
-                  <ProductDescription 
-                    data={this.state.data} 
-                    currency={this.state.currency}
-                    changeCartItem={this.changeCartItem}
-                  />}
-                />
-                <Route path='/cart' element={
-                  <Cart 
-                    data={this.state.data} 
-                    currency={this.state.currency}
-                    cartItems={this.state.cartItems}
-                    addToCart={this.addToCart}
-                    changeCartItem={this.changeCartItem}
-                    removeFromCart={this.removeFromCart}
-                    totalPrice={this.state.totalPrice}
-                    tax={this.state.tax}
-                  />} />
-              </Routes>
-            
-          </div>
-        </Router>
-        
+                </div>
+                <Routes>  
+                  <Route exact path="/" element={<Navigate to='/all'/>} />
+                  <Route path="/:category" element={[<Category />, 
+                    <ProductListing />
+                  ]}
+                  />
+                  <Route path='/details/:name' element={
+                    <ProductDescription />}
+                  />
+                  <Route path='/cart' element={
+                    <Cart 
+                      data={this.state.data} 
+                      cartItems={this.state.cartItems}
+                    />} />
+                </Routes>
+              
+            </div>
+          </Router>
+        </Context.Provider>
       </div>
     )
   }

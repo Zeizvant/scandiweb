@@ -4,8 +4,11 @@ import logo from '../../images/logo.png';
 import CurrencySwitcher from '../CurrencySwitcher';
 import CartDropDown from '../CartDropDown'
 import {Link} from 'react-router-dom'
+import Context from '../../Context';
 
 class Menu extends PureComponent {
+
+    static contextType = Context
 
     render(){
         return (
@@ -14,7 +17,7 @@ class Menu extends PureComponent {
                     <div className='menu-categories'>
                         <ul>
                             {
-                                this.props.categories.map(category => {
+                                this.context.categories.map(category => {
                                     return (
                                         <Link to={`/${category.name}`} key={category.name}>
                                             <li >{category.name}</li>
@@ -32,16 +35,8 @@ class Menu extends PureComponent {
                         
                     </div>
                     <div className='currency-cart'>
-                        <CurrencySwitcher changeCurrency={this.props.changeCurrency} currency={this.props.currency}/>
-                        <CartDropDown 
-                            data={this.props.data} 
-                            currency={this.props.currency} 
-                            cartItems={this.props.cartItems}
-                            addToCart={this.props.addToCart}
-                            removeFromCart={this.props.removeFromCart}
-                            totalPrice={this.props.totalPrice}
-                            quantity={this.props.quantity}
-                        />
+                        <CurrencySwitcher />
+                        <CartDropDown />
                     </div>
                 </div>
             </div>

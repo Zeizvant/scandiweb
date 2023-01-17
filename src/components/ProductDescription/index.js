@@ -3,8 +3,11 @@ import { PureComponent } from 'react';
 import './productDescription.css';
 import { Interweave } from 'interweave';
 import { useParams } from 'react-router-dom';
+import Context from '../../Context';
 
 class ProductDescription extends PureComponent {
+
+    static contextType = Context
 
     constructor(props){
         super(props)
@@ -12,7 +15,7 @@ class ProductDescription extends PureComponent {
     }
 
     componentDidUpdate(){
-        const item = this.props.data.find(item => {
+        const item = this.context.data.find(item => {
             return item.id == this.props.params.name;
         })
         let counter = 0;
@@ -27,12 +30,12 @@ class ProductDescription extends PureComponent {
     }
 
     render(){
-        if (this.props.data[0] != undefined){
-            const item = this.props.data.find(item => {
+        if (this.context.data[0] != undefined){
+            const item = this.context.data.find(item => {
                 return item.id == this.props.params.name;
             })
             const images = item.gallery
-            const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
+            const price = item.prices.filter(price => price.currency.symbol == this.context.currency)
             return (               
                 <div className='product-description-container'>
                     <div className='images'>
@@ -93,7 +96,7 @@ class ProductDescription extends PureComponent {
                         <div className={item.inStock ? 'add-to-cart-button' :'add-to-cart-button disabled' } onClick={(event) => {
                             if(item.inStock && this.state.submitEnable){
                                 let id = item.id
-                                this.props.changeCartItem({
+                                this.context.changeCartItem({
                                 id: item.id,
                                 name: item.name,
                                 price: item.prices,

@@ -2,15 +2,18 @@ import { PureComponent } from 'react';
 import './productListing.css';
 import ProductCard from '../ProductCard';
 import { useParams } from 'react-router-dom';
+import Context from '../../Context';
 
 class ProductListing extends PureComponent {
 
+    static contextType = Context
+
     render(){
-        if(this.props.data[0] != undefined){
+        if(this.context.data[0] != undefined){
             return (
                 <div className='product-listing'>
-                    {this.props.data.map((item) => {
-                        const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
+                    {this.context.data.map((item) => {
+                        const price = item.prices.filter(price => price.currency.symbol == this.context.currency)
                         if(this.props.params.category === "all"){
                             return <ProductCard 
                                 key={item.id}
@@ -20,7 +23,6 @@ class ProductListing extends PureComponent {
                                 price={price[0].currency.symbol + (price[0].amount.toFixed(2))} 
                                 img={item.gallery[0]}
                                 inStock={item.inStock}
-                                addToCart={this.props.addToCart}
                                 attributes={item.attributes}
                                 brand={item.brand}
                                 />
@@ -34,7 +36,6 @@ class ProductListing extends PureComponent {
                                 price={price[0].currency.symbol + price[0].amount.toFixed(2)}
                                 img={item.gallery[0]}
                                 inStock={item.inStock}
-                                addToCart={this.props.addToCart}
                                 attributes={item.attributes}
                                 brand={item.brand}
                                 />

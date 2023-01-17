@@ -3,6 +3,7 @@ import './currencySwitcher.css';
 import downArrow from '../../images/down_arrow.png';
 import upArrow from '../../images/up_arrow.png';
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import Context from '../../Context';
 
 
 const client = new ApolloClient({
@@ -11,6 +12,7 @@ const client = new ApolloClient({
 })
 
 class CurrencySwitcher extends PureComponent {
+    static contextType = Context
 
     constructor(props){
         super(props)
@@ -53,7 +55,7 @@ class CurrencySwitcher extends PureComponent {
         return (
             
             <div className='currency-switcher'>
-                <p className='currency-symbol'>{this.props.currency}</p>
+                <p className='currency-symbol'>{this.context.currency}</p>
                 <div className='currency-container'>
                     {this.state.arrowClicked ? 
                         <img id='up-arrow' src={upArrow} alt='up arrow' onClick={() => {
@@ -74,7 +76,7 @@ class CurrencySwitcher extends PureComponent {
                         {this.state.currencies.map((currency) => {
                             return (
                             <li key={currency.symbol} onClick={(event => {
-                                this.props.changeCurrency(currency.symbol)
+                                this.context.changeCurrency(currency.symbol)
                                 const dropDownMenu = document.querySelector(".currency-dropdown");
                                 dropDownMenu.style.display = "none";
                                 this.setState({arrowClicked: false})

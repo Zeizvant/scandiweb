@@ -1,7 +1,10 @@
 import { PureComponent } from 'react';
+import Context from '../../Context';
 import './cart.css';
 
 class Cart extends PureComponent {
+
+    static contextType = Context
 
     constructor(props){
         super(props)
@@ -12,7 +15,7 @@ class Cart extends PureComponent {
 
     plusButton(item, price, cartItem){
         let id = item.id
-        this.props.addToCart({
+        this.context.addToCart({
             id: item.id,
             name: item.name,
             price: price,
@@ -26,7 +29,7 @@ class Cart extends PureComponent {
     }
     minusButton(item, price, cartItem){
         let id = item.id
-        this.props.removeFromCart({
+        this.context.removeFromCart({
             id: item.id,
             name: item.name,
             price: price,
@@ -60,10 +63,7 @@ class Cart extends PureComponent {
         
     }
 
-    
-
     render(){
-        
         if(this.props.data[0] != undefined && this.state.cartItems != undefined){
             let quantity = 0;
             for(let i=0; i<this.props.cartItems.length; i++){
@@ -78,7 +78,7 @@ class Cart extends PureComponent {
                                 this.props.data.map((item) => {
                                     const id = cartItem.longId
                                     const images = item.gallery
-                                    const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
+                                    const price = item.prices.filter(price => price.currency.symbol == this.context.currency)
                                     if(cartItem.id === item.id && cartItem.quantity > 0){
                                         return (
                                             <div className='cart-component-item-continer' key={item.id}>
@@ -180,9 +180,9 @@ class Cart extends PureComponent {
                     </div>{
                         this.props.cartItems.length > 0 && (
                             <div className='cart-component-total'>
-                                <p><span>Tax 21%:</span>{this.props.currency + this.props.tax.toFixed(2)}</p>
+                                <p><span>Tax 21%:</span>{this.context.currency + this.context.tax.toFixed(2)}</p>
                                 <p><span>Quantity:</span>{quantity}</p>
-                                <p><span>Total:</span>{this.props.currency + (this.props.totalPrice).toFixed(2)}</p>
+                                <p><span>Total:</span>{this.context.currency + (this.context.totalPrice).toFixed(2)}</p>
                                 <div className='order-button'>order</div>
                             </div>
                         )

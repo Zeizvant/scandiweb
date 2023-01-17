@@ -2,8 +2,10 @@ import { PureComponent } from 'react';
 import './cartDropDown.css';
 import cartLogo from '../../images/emptyCart.png'
 import {Link} from 'react-router-dom'
+import Context from '../../Context';
 
 class CartDropDown extends PureComponent {
+    static contextType = Context
 
     constructor(props){
         super(props)
@@ -34,7 +36,7 @@ class CartDropDown extends PureComponent {
 
     plusButton(item, price, attributes){
         let id = item.id
-        this.props.addToCart({
+        this.context.addToCart({
             id: item.id,
             name: item.name,
             price: price,
@@ -48,7 +50,7 @@ class CartDropDown extends PureComponent {
     }
     minusButton(item, price, attributes){
         let id = item.id
-        this.props.removeFromCart({
+        this.context.removeFromCart({
             id: item.id,
             name: item.name,
             price: price,
@@ -62,14 +64,14 @@ class CartDropDown extends PureComponent {
     }
 
     render(){
-        if(this.props.data[0] != undefined){
+        if(this.context.data[0] != undefined){
                         return (
                             
                             <div className="cart-dropdown">
                                 {
-                                    this.props.quantity > 0 && 
+                                    this.context.quantity > 0 && 
                                     <div className='quantity-circle'>
-                                        {this.props.quantity}
+                                        {this.context.quantity}
                                     </div>
                                 }
                                 <img id="cart-dropdown-logo" className='cart-dropdown-logo' src={cartLogo} onClick={() => {
@@ -86,12 +88,12 @@ class CartDropDown extends PureComponent {
                                 
                                 <div className={this.state.clicked ? 'cart-dropdown-menu' : 'cart-dropdown-menu none'}>
                                     <h2>My bag, <span className='h2-span'>
-                                        {this.props.cartItems.length > 1 ? this.props.cartItems.length + ' items': this.props.cartItems.length + ' item'}
+                                        {this.context.cartItems.length > 1 ? this.context.cartItems.length + ' items': this.context.cartItems.length + ' item'}
                                         </span></h2>
-                                    {this.props.cartItems.map(cartItem => {
+                                    {this.context.cartItems.map(cartItem => {
                                         return (
-                                            this.props.data.map((item) => {
-                                                const price = item.prices.filter(price => price.currency.symbol == this.props.currency)
+                                            this.context.data.map((item) => {
+                                                const price = item.prices.filter(price => price.currency.symbol == this.context.currency)
                                                 if(cartItem.id === item.id){
                                                     return ( 
                                                         <div key={cartItem.id} className='cart-dropdown-item'>
@@ -169,11 +171,11 @@ class CartDropDown extends PureComponent {
                                         )
                                         
                                     })}
-                                    {this.props.cartItems.length > 0 && 
+                                    {this.context.cartItems.length > 0 && 
                                         <div className='total-container'>
                                             <div className='total'>
                                                 <p className='total-text'>Total</p>
-                                                <p className='total-price'>{this.props.currency + this.props.totalPrice.toFixed(2)}</p>
+                                                <p className='total-price'>{this.context.currency + this.context.totalPrice.toFixed(2)}</p>
                                             </div>   
                                             <div className='dropdown-buttons'>
                                                 <Link to='/cart'>
